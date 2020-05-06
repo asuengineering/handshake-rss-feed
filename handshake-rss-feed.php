@@ -11,9 +11,7 @@
  */
 
 /* TODO: Check to see if Carbon Fields is loaded. If not loaded, go for it using code within plugin. For now, assume it's loaded. */
-
-/* Define custom fields for Handshake RSS feed and RSS 2 JSON API key */
-
+/* Define theme option fields to collect thw Handshake RSS feed and RSS 2 JSON API key */
 use Carbon_Fields\Container;
 use Carbon_Fields\Field;
 
@@ -32,6 +30,16 @@ function asefse_add_handshake_rss_options() {
 	) );
 
 }
+
+/* Register some scripts and stylesheets. Enqueue them during the shortcode callback. */
+add_action( 'wp_enqueue_scripts', 'asefse_add_handshake_rss_scripts' );
+function asefse_add_handshake_rss_scripts() {
+
+	wp_register_style( 'handshake-rss-css', plugin_dir_url( __FILE__ ) . '/css/handshake-rss.css', array(), null );
+	wp_register_script( 'handshake-rss-js', plugin_dir_url( __FILE__ ) . '/js/handshake-rss.js', array('jquery', 'jquery-collapser'), null);
+	wp_register_script( 'jquery-collapser', plugin_dir_url( __FILE__ ) . '/js/jquery.collapser.min.js', array('jquery'), '3.0');
+}
+
 
 /* Shortcode callback when the shortcode is encountered on the page. */
 function handshake_rss_shortcode() {
@@ -53,14 +61,18 @@ function handshake_rss_shortcode() {
 	if ( (empty($rss_url)) || (empty( $api_key)) ) {
 		echo 'Please check the Handshake RSS theme options settings. You are missing a value.';
 		return false;
-	} else {
-		$request = wp_remote_get( $service . $rss_url . $api_key . $item_count  );
-
-		// Error check for invalid JSON.
-		if ( is_wp_error( $request ) ) {
-			return false; // Bail early
-		}
 	}
+
+	$request = wp_remote_get( $service . $rss_url . $api_key . $item_count );
+
+	// Error check for invalid JSON.
+	if ( is_wp_error( $request ) ) {
+		return false; // Bail early
+	}
+
+	wp_enqueue_style( 'handshake-rss-css' );
+	wp_enqueue_script( 'handshake-rss-js' );
+	wp_enqueue_script( 'jquery-collapser' );
 
 	$body = wp_remote_retrieve_body( $request );
 
@@ -70,9 +82,11 @@ function handshake_rss_shortcode() {
 	if( ! empty( $data ) ) {
 
 		foreach( $data->items as $listing ) {
+			$description = preg_replace('#\R+#', '<br/>', $listing->description);
+
 			$output .= '<div class="handshake-item">';
 			$output .= '<a class="handshake-item-title" href="' . esc_url( $listing->link ) . '">' . $listing->title . '</a>';
-			$output .= '<p class="handshake-item-description">' . nl2br($listing->description) . '</p>';
+			$output .= '<p class="handshake-item-description">' . $description . '</p>';
 			$output .= '</div>';
 		}
 

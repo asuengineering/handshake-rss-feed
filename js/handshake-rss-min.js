@@ -1,0 +1,1 @@
+jQuery(document).ready((function(e){e(".handshake-item-description").collapser({mode:"lines",truncate:2})}));
