@@ -5,7 +5,7 @@
  * Description:     Embed an RSS feed from <a href="https://www.joinhandshake.com/" target="_blank">Handshake</a> into a WordPress post or page.
  * Author:          Steve Ryan
  * Author URI:      https://engineering.asu.edu
- * Version:         0.1
+ * Version:         2.0
  *
  * GitHub Plugin URI: https://github.com/asuengineering/handshake-rss-feed
  */
