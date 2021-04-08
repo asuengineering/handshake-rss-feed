@@ -1,0 +1,100 @@
+{
+    "key": "group_606f62b7d13fd",
+    "title": "Handshake RSS Plugin Options",
+    "fields": [
+        {
+            "key": "field_606f62beec8f3",
+            "label": "Message",
+            "name": "",
+            "type": "message",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "message": "<p>These plugin settings effect the output of the <code>[handshake-rss]<\/code> shortcode. The plugin utilizes the service <a href=\"https:\/\/rss2json.com\/#rss_url=https%3A%2F%2Fgithub.com%2Fvuejs%2Fvue%2Freleases.atom\" target=\"_blank\" title=\"RSS 2 JSON\">RSS 2 JSON<\/a>. The free service requires registration and a free API key.<\/p>",
+            "new_lines": "",
+            "esc_html": 0
+        },
+        {
+            "key": "field_606f62fdec8f5",
+            "label": "Max # of Items Returned",
+            "name": "handshake_rss_plugin_item_count",
+            "type": "number",
+            "instructions": "If left blank, the maximum number of returned items will be 10. Imposed limit by the RSS 2 JSON service.",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "default_value": 10,
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "min": 1,
+            "max": 100,
+            "step": 1
+        },
+        {
+            "key": "field_606f6aa10f12e",
+            "label": "Handshake RSS Feed URL",
+            "name": "handshake_rss_plugin_feed_url",
+            "type": "text",
+            "instructions": "Handshake RSS feed URL",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
+            "key": "field_606f62e4ec8f4",
+            "label": "RSS 2 JSON API Key",
+            "name": "handshake_rss_plugin_api_key",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "options_page",
+                "operator": "==",
+                "value": "acf-options-handshake-rss-feed"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "",
+    "modified": 1617917081
+}
